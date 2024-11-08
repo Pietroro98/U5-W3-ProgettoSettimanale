@@ -8,7 +8,6 @@ public class U5w3ProgettoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(U5w3ProgettoApplication.class, args);
-
 	}
 
 }
