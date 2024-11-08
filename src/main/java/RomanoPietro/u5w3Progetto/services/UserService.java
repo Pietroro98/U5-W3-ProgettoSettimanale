@@ -2,6 +2,7 @@ package RomanoPietro.u5w3Progetto.services;
 
 import RomanoPietro.u5w3Progetto.entities.User;
 import RomanoPietro.u5w3Progetto.exceptions.BadRequestException;
+import RomanoPietro.u5w3Progetto.exceptions.NotFoundException;
 import RomanoPietro.u5w3Progetto.payloads.NewUserDTO;
 import RomanoPietro.u5w3Progetto.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -32,5 +35,10 @@ public class UserService {
         User newUser = new User(body.username(), body.name(), body.surname(), body.email(), body.password(), body.role());
         return this.userRepository.save(newUser);
 
+    }
+
+    public User findById(UUID userId) {
+        return this.userRepository.findById(userId).orElseThrow(
+                () -> new NotFoundException(userId));
     }
 }
