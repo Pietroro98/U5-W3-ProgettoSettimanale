@@ -27,12 +27,12 @@ public class Event {
     @JoinColumn(name = "organizer_id")
     private User organizer;
 
-    public Event(String title, String description, String date, String location, int numberOfAviableSeats, User organizer) {
+    public Event(String title, String description, String date, String location, int numberOfAviableSeats) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.location = location;
         this.numberOfAviableSeats = numberOfAviableSeats;
-        this.organizer = organizer;
+
     }
 }

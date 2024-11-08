@@ -24,7 +24,9 @@ public class SecurityConfig {
 
         httpSecurity.sessionManagement(http -> http.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/**").permitAll());
+        // Autorizzo le richieste agli endpoint relativi agli eventi solo per utenti con ruoli USER o EVENT_ORGANIZER
+        httpSecurity.authorizeHttpRequests(auth -> auth.requestMatchers("/events/**")
+                .hasAnyRole("USER", "EVENT_ORGANIZER").anyRequest().permitAll());
 
         return httpSecurity.build();
     }
