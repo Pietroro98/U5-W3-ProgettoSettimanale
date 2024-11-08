@@ -26,6 +26,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping("/login")
     public UserLoginResponseDTO login(@RequestBody UserLoginDTO body) {
         return new UserLoginResponseDTO(this.loginService.checkCredentialsAndGenerateToken(body));
