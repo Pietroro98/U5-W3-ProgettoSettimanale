@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @NoArgsConstructor
-public class reservations {
+public class Reservations {
     @Id
     @GeneratedValue
     private UUID id;
@@ -28,7 +28,7 @@ public class reservations {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    public reservations(User user, Event event) {
+    public Reservations(User user, Event event) {
         this.user = user;
         this.event = event;
     }
