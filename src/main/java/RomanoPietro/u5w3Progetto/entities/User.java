@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private Role role;
 
 
-    public User(String username, String name, String surname, String email, String password, Role role) {
+    public User(String username, String name, String surname, String email, String password) {
         this.username = username;
         this.name = name;
         this.surname = surname;

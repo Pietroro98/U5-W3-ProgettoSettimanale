@@ -32,7 +32,8 @@ public class UserService {
                     throw new BadRequestException("Email" + body.email() + "giá in uso");
                 }
         );
-        User newUser = new User(body.username(), body.name(), body.surname(), body.email(), body.password(), body.role());
+        User newUser = new User(body.username(), body.name(), body.surname(), body.email(), body.password());
+        newUser.setRole(body.role());
         return this.userRepository.save(newUser);
 
     }
@@ -43,7 +44,6 @@ public class UserService {
     }
 
     public User findByEmail(String email) {
-        return this.userRepository.findByEmail(email).orElseThrow(
-                ()-> new NotFoundException("L'utente con email" + email + "non é stato trovato!"));
+        return this.userRepository.findByEmail(email).orElseThrow(()-> new NotFoundException("L'utente con email" + email + "non é stato trovato!"));
     }
 }
