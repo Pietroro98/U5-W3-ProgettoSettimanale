@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,6 +19,8 @@ import java.util.UUID;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder bcript;
 
     public Page<User> findAll(int page, int size, String sortBy) {
         if(size > 100) size = 100;
@@ -32,7 +35,7 @@ public class UserService {
                     throw new BadRequestException("Email" + body.email() + "giá in uso");
                 }
         );
-        User newUser = new User(body.username(), body.name(), body.surname(), body.email(), body.password());
+        User newUser = new User(body.username(), body.name(), body.surname(), body.email(), bcript.encode(body.password()));
         newUser.setRole(body.role());
         return this.userRepository.save(newUser);
 
