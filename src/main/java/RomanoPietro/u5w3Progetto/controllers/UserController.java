@@ -42,21 +42,6 @@ public class UserController {
         return this.userService.findAll(page, size, sortBy);
     }
 
-    //2. POST http://localhost:3005/users (+ req.body) --> 201
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public User save(@RequestBody @Validated NewUserDTO body, BindingResult validationResult) {
-        if (validationResult.hasErrors()) {
-            String message = validationResult
-                    .getAllErrors()
-                    .stream()
-                    .map(objectError -> objectError.getDefaultMessage())
-                    .collect(Collectors.joining(", "));
-            throw new BadRequestException("ci sono stati errori nel payload!" + message);
-        }
-        return this.userService.save(body);
-    }
-
     //3. GET http://localhost:3005/users/{userId}
     @GetMapping("/{userId}")
     public User findById(@PathVariable UUID userId) {

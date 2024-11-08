@@ -8,4 +8,8 @@ public class NotFoundException extends RuntimeException{
         super("Il record con id: " + id + " non é stato trovato");
     }
 
+    public NotFoundException(String message) {
+        super(message);
+    }
+
 }
