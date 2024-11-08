@@ -9,4 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, UUID> {
+    Event findByDataAndLocation(String date, String location);
 }

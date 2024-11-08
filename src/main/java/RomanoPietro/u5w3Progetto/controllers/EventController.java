@@ -50,4 +50,10 @@ public class EventController {
         return this.eventService.findById(eventId);
     }
 
+    // 4. PUT http://localhost:3005/events/{eventId} (+ req.body)
+    @PutMapping("/{eventId}")
+    public Event findByIdAndUpdate(@PathVariable UUID eventId, @RequestBody NewEventDTO body) {
+        return this.eventService.findByIdAndUpdate(eventId, body);
+    }
+
 }

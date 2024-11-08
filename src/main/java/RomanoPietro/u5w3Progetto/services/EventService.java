@@ -1,6 +1,7 @@
 package RomanoPietro.u5w3Progetto.services;
 
 import RomanoPietro.u5w3Progetto.entities.Event;
+import RomanoPietro.u5w3Progetto.exceptions.BadRequestException;
 import RomanoPietro.u5w3Progetto.exceptions.NotFoundException;
 import RomanoPietro.u5w3Progetto.payloads.NewEventDTO;
 import RomanoPietro.u5w3Progetto.repositories.EventRepository;
@@ -30,5 +31,21 @@ public class EventService {
         return eventRepository.findById(eventID).orElseThrow(() -> new NotFoundException(eventID));
     }
 
+    public Event findByIdAndUpdate(UUID eventId, NewEventDTO body) {
+        Event found = this.findById(eventId);
+
+        if(found.getDate().equals(body.date())
+                && found.getLocation().equals(body.location()))
+            this.eventRepository.findByDataAndLocation(body.date(), body.location());
+
+        found.setLocation(body.location());
+        found.setDate(body.date());
+
+        if (body.numberOfAviableSeats() > 10){
+            throw new BadRequestException("Non puoi aggiungere altri posti a questo evento");
+        }
+
+        return this.eventRepository.save(found);
+    }
 
 }
