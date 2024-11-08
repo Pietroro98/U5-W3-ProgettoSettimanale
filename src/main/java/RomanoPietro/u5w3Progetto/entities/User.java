@@ -2,6 +2,7 @@ package RomanoPietro.u5w3Progetto.entities;
 
 
 import RomanoPietro.u5w3Progetto.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @NoArgsConstructor
+@JsonIgnoreProperties({"password", "role", "accountNonLocked", "accountNonExpired", "credentialsNonExpired", "enabled", "authorities"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue
