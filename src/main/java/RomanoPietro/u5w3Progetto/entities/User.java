@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private RomanoPietro.u5w3Progetto.enums.Role role;
+    private Role role;
 
 
     public User(String username, String name, String surname, String email, String password, Role role) {
@@ -39,7 +39,7 @@ public class User implements UserDetails {
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = Role.USER;
     }
 
     @Override
