@@ -23,7 +23,6 @@ public class EventService {
 
     public Event save(NewEventDTO body) {
         Event newViaggio = new Event(body.title(), body.description(), body.date(), body.location(), body.numberOfAviableSeats());
-
         if (body.numberOfAviableSeats() > 10){
             throw new BadRequestException("Non puoi aggiungere altri posti a questo evento");
         }
@@ -40,10 +39,11 @@ public class EventService {
 
         if(found.getDate().equals(body.date())
                 && found.getLocation().equals(body.location()))
-            this.eventRepository.findByDataAndLocation(body.date(), body.location());
+            this.eventRepository.findByDateAndLocation(body.date(), body.location());
 
         found.setLocation(body.location());
         found.setDate(body.date());
+
         return this.eventRepository.save(found);
     }
 
